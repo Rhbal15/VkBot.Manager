@@ -1,0 +1,35 @@
+﻿@using VkBot.Manager.ViewModels.KeyboardViewModels
+@model VkBot.Manager.ViewModels.KeyboardViewModels.KeyboardIndexViewModel
+
+@{
+    ViewBag.Title = "Клавиатура";
+    Layout = "_Layout";
+}
+
+<br />
+
+<h2>Текущая пользовательская клавиатура</h2>
+<a asp-action="Update">Обновить клавиатуру</a>
+
+<br />
+
+<div class="row">
+    <table class="table col-sm-6">
+        <tbody>
+            <tr>
+                @foreach (var button in Model.Buttons)
+                {
+                    if (button.Position % 4 == 0)
+                    {
+                    @:</tr><tr>
+                    }
+                    <td>
+                        <a class="btn btn-light h1" asp-controller="Keyboard" asp-action="Edit" asp-route-id="@button.Id">
+                            @button.Symbol <span class="badge badge-light h1">@button.Mentions</span>
+                        </a>
+                    </td>
+                }
+            </tr>
+        </tbody>
+    </table>
+</div>

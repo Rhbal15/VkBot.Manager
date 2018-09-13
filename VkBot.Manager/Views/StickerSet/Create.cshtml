@@ -1,0 +1,22 @@
+﻿@model object
+
+@{
+    ViewBag.Title = "Добавить набор стикеров";
+    Layout = "_Layout";
+}
+<br />
+<h2>@ViewBag.Title</h2>
+<br />
+<form method="post">
+    <div class="form-group">
+        <label for="stickerSetName">Название набора стикеров:</label>
+        <input type="text" name="stickerSetName" class="form-control" id="stickerSetName" placeholder="Введите название набора стикеров">
+        <small id="stickerSetNameHelp" class="form-text text-muted">Необходимо вводить название, которое используется для добавления наборов стикеров в Телеграмм.</small>
+    </div>
+    <div class="form-check">
+        <input name="publish" type="checkbox" class="form-check-input" id="publish-immediately">
+        <label class="form-check-label" for="publish-immediately">Опубликовать: </label>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Загрузить</button>
+</form>

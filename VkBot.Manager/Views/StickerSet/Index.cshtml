@@ -1,0 +1,42 @@
+﻿@using VkBot.Manager.ViewModels.StickerSetViewModels
+@model VkBot.Manager.ViewModels.StickerSetViewModels.StickerSetIndexModel
+
+@{
+    ViewBag.Title = "Наборы стикеров";
+    Layout = "_Layout";
+}
+
+<div>
+    <br/>
+
+    <h2>@ViewBag.Title</h2>
+
+    <a asp-controller="StickerSet" asp-action="Create">Добавить набор стикеров из телеграмма</a>
+
+    <br/><br/>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr class="row">
+            <th scope="col" class="col-lg-2">Дата добавления</th>
+            <th scope="col" class="col-lg-2">Название набора</th>
+            <th scope="col" class="col-lg-2">ИД албома в ВК</th>
+            <th scope="col" class="col-lg-2">Количество стикеров</th>
+            <th scope="col" class="col-lg-4">Доступные смайлы</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var stickerSet in Model.StickerSets)
+        {
+            <tr class="row">
+                <td class="col-lg-2">@stickerSet.CreatedDate</td>
+                <td class="col-lg-2">
+                    <a asp-controller="StickerSet" asp-action="Details" asp-route-id="@stickerSet.Id">@stickerSet.Title</a>
+                </td>
+                <td class="col-lg-2">@stickerSet.VkAlbumId</td>
+                <td class="col-lg-2">@stickerSet.SickerCount</td>
+                <td class="col-lg-4">@stickerSet.AvaliableEmoji</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

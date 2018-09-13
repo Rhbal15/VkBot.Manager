@@ -1,0 +1,155 @@
+﻿@using VkBot.Manager.ViewModels.StickersViewModels
+@model VkBot.Manager.ViewModels.StickersViewModels.StickersEditModel
+
+@{
+    ViewBag.Title = "Редактировать стикер";
+    Layout = "_Layout";
+}
+
+<br/>
+
+<h2>Редактировать стикер</h2>
+
+<br/>
+
+<div class="row">
+    <div class="col-md-6">
+        <img src="@Model.PhotoUrl" class="img-fluid" alt="Responsive image">
+    </div>
+    <div class="col-md-6">
+        <dl>
+            <dt class="col-sm-3">Набор стикеров:</dt>
+            <dd class="col-sm-9">
+                <a asp-controller="StickerSet" asp-action="Details" asp-route-id="@Model.StickerSetId">@Model.StickerSetTitle</a>
+            </dd>
+            <dt class="col-sm-3">Дата создания:</dt>
+            <dd class="col-sm-9">@Model.CreatedDate</dd>
+        </dl>
+    </div>
+</div>
+
+<br/>
+
+<div class="row">
+    <div class="col-md-6">
+        <h3>Добавленые смайлы</h3>
+        <br/>
+        <div class="card-columns" id="added-emoji">
+            @foreach (var emoji in Model.AddedEmoji)
+            {
+                <div class="card added-card" data-rowid="@emoji.ConnectionId">
+                    <div class="card-body">
+                        <a href="#" class="remove-emoji" data-id="@emoji.ConnectionId">
+                            <h5 class="card-title">@emoji.Symbol</h5>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h3>Смайлы на клавиатуре</h3>
+        <br />
+        <div class="card-columns" id="other-emoji">
+            @foreach (var emoji in Model.KeyboardEmoji)
+            {
+                <div class="card other-card" data-rowid="@emoji.Id">
+                    <div class="card-body">
+                        <a href="#" class="add-emoji" data-id="@emoji.Id">
+                            <h5 class="card-title">@emoji.Symbol</h5>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <h3>Остальные смайлы</h3>
+        <br />
+        <div class="card-columns" id="other-emoji">
+            @foreach (var emoji in Model.OtherEmoji)
+            {
+                <div class="card other-card" data-rowid="@emoji.Id">
+                    <div class="card-body">
+                        <a href="#" class="add-emoji" data-id="@emoji.Id">
+                            <h5 class="card-title">@emoji.Symbol</h5>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        function AddEmoji(emojiId) {
+            $.ajax({
+                url: "@($"{Url.Action("AddEmoji", "Stickers")}")",
+                contentType: "application/json",
+                method: "POST",
+                data: JSON.stringify({
+                    emojiId: emojiId,
+                    stickerId: @Model.Id
+                }),
+                success: function (emoji) {
+                    var emojiSymbol = $("a[data-id='" + emojiId + "'][class*='add-emoji'] h5").text();
+                    $("#other-emoji div[data-rowid='" + emojiId + "']").remove();
+                    $("#added-emoji").append(
+                        "<div class=\"card added-card\" data-rowid=\"" + emoji + "\">" +
+                        "<div class=\"card-body\">" +
+                        "<a href=\"#\" class=\"remove-emoji\" data-id=\"" +
+                        emoji +
+                        "\">" +
+                        "<h5 class=\"card-title\">" +
+                        emojiSymbol +
+                        "</h5>" +
+                        "</a>" +
+                        "</div>" +
+                        "</div>");
+
+                }
+            });
+        }
+
+        function RemoveEmoji(stickerEmojiId) {
+            $.ajax({
+                url: "@($"{Url.Action("RemoveEmoji", "Stickers")}/")" + stickerEmojiId,
+                contentType: "application/json",
+                method: "DELETE",
+                success: function(emojiId) {
+                    var emojiSymbol = $("a[data-id='" + stickerEmojiId + "'][class*='remove-emoji'] h5").text();
+                    $("#added-emoji div[data-rowid='" + stickerEmojiId + "']").remove();
+                    $("#other-emoji").append(
+                        "<div class=\"card added-card\" data-rowid=\"" + emojiId + "\">" +
+                        "<div class=\"card-body\">" +
+                        "<a href=\"#\" class=\"add-emoji\" data-id=\"" +
+                        emojiId +
+                        "\">" +
+                        "<h5 class=\"card-title\">" +
+                        emojiSymbol +
+                        "</h5>" +
+                        "</a>" +
+                        "</div>" +
+                        "</div>");
+                }
+            });
+        }
+
+        $("body").on("click",
+            ".add-emoji",
+            function (event) {
+                event.preventDefault();
+                var emojiId = $(this).data("id");
+                AddEmoji(emojiId);
+            });
+
+        $("body").on("click",
+            ".remove-emoji",
+            function (event) {
+                event.preventDefault();
+                var emojiStickerId = $(this).data("id");
+                RemoveEmoji(emojiStickerId);
+            });
+    </script>
+}

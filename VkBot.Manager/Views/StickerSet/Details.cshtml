@@ -1,0 +1,81 @@
+﻿@using VkBot.Manager.ViewModels.StickerSetViewModels
+@model VkBot.Manager.ViewModels.StickerSetViewModels.StickerSetDetailModel
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "_Layout";
+}
+
+<br />
+
+<h2>@Model.Title</h2>
+
+<br />
+
+<dl class="row">
+    <dt class="col-sm-3">Дата создания</dt>
+    <dd class="col-sm-9">@Model.CreatedDate</dd>
+
+    <dt class="col-sm-3">ИД альбома в вк</dt>
+    <dd class="col-sm-9">
+        <a href="@Model.VkAlbumUrl">@Model.VkAlbumId</a>
+    </dd>
+
+    <dt class="col-sm-3">Количество стикеров</dt>
+    <dd class="col-sm-9" id="stickerCount"> @Model.StickerCount</dd>
+
+</dl>
+
+
+<a href="" class="btn btn-outline-dark btn-sm">Редактировать</a>
+<a asp-action="Publish" asp-route-id="@Model.Id" class="btn btn-outline-dark btn-sm">Опубликовать</a>
+<a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger btn-sm">Удалить</a>
+
+<br />
+<br />
+
+<h2>Стикеры:</h2>
+
+<br />
+
+<div class="card-columns">
+    @foreach (var sticker in Model.Stickers)
+    {
+        <div class="card" id="@("card" + sticker.Id)" data-rowid="@sticker.Id">
+            <img class="card-img-top" src="@sticker.VkPhotoUrl" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Смайлы</h5>
+                <p class="card-text">@sticker.Emojis</p>
+            </div>
+            <div class="card-body">
+                <a asp-controller="Stickers" asp-action="Edit" asp-route-id="@sticker.Id" class="card-link">Редактировать</a>
+                <a class="delete-sticker card-link" href="#" data-id="@sticker.Id">Удалить</a>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        function DeleteSticker(id) {
+            $.ajax({
+                url: `@($"{Url.Action("Delete", "Stickers")}/")${id}`,
+                contentType: "application/json",
+                method: "DELETE",
+                success: function(user) {
+                    $(`div[data-rowid='${id}']`).remove();
+                    const oldCount = $("#stickerCount").text();
+                    $("#stickerCount").text(oldCount - 1);
+                }
+            });
+        }
+
+        $("body").on("click",
+            ".delete-sticker",
+            function(event) {
+                event.preventDefault();
+                const id = $(this).data("id");
+                DeleteSticker(id);
+            });
+    </script>
+}

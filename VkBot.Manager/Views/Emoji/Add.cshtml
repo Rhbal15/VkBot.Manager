@@ -1,0 +1,21 @@
+﻿@model object
+
+@{
+    ViewBag.Title = "Добавить смайлы";
+    Layout = "_Layout";
+}
+
+<br/>
+
+<h2>Добавить смайлы</h2>
+
+<br/>
+
+<form method="post" asp-action="Add">
+    <div class="form-group">
+        <label for="emojiSequence">Последовательность смайлов для добавления через пробел:</label>
+        <input type="text" class="form-control" name="emojiSequence" id="emojiSequence" required placeholder="Последовательность смайлов через пробел">
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary">Добавить</button>
+</form>

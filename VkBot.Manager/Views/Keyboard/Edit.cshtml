@@ -1,0 +1,25 @@
+﻿@using VkBot.Manager.ViewModels.KeyboardViewModels
+@model VkBot.Manager.ViewModels.KeyboardViewModels.KeyboardDetailsModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+<div class="card-columns">
+    @foreach (var sticker in Model.Stickers)
+    {
+        <div class="card" id="@("card" + sticker.Id)" data-rowid="@sticker.Id">
+            <img class="card-img-top" src="@sticker.VkPhotoUrl" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Смайлы</h5>
+                <p class="card-text">@sticker.Emojis</p>
+            </div>
+            <div class="card-body">
+                <a asp-controller="Stickers" asp-action="Edit" asp-route-id="@sticker.Id" class="card-link">Редактировать</a>
+                <a class="delete-sticker card-link" href="#" data-id="@sticker.Id">Удалить</a>
+            </div>
+        </div>
+    }
+</div>

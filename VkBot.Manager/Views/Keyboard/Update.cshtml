@@ -1,0 +1,22 @@
+﻿@model object
+
+@{
+    ViewBag.Title = "Обновить клавиатуру";
+    Layout = "_Layout";
+}
+
+<br/>
+
+<h2>@ViewBag.Title</h2>
+
+<br/>
+
+<form method="post" asp-action="Update">
+    <div class="form-group">
+        <label for="smileSequence">Последовательность смайлов для клавиатуры:</label>
+        <input type="text" class="form-control" name="smileSequence" id="smileSequence" required placeholder="Введите последовательность из 40 смайлов через пробел">
+        <small id="smileHelper" class="form-text text-muted">Необходимо ввести ровно 40 смайлов.</small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
