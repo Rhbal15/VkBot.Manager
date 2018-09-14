@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using VkBot.Manager.Models;
+using VkBot.Manager.Data;
 
 namespace VkBot.Manager.Services.Models
 {

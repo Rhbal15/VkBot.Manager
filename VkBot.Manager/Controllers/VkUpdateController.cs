@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using VkBot.Manager.Data;
 using VkBot.Manager.Helpers;
-using VkBot.Manager.Models;
 using VkBot.Manager.Services.Models;
 using VkBot.Manager.Services.Vk;
 using VkBot.Manager.ViewModels.BotViewModels;

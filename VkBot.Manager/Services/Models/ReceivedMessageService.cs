@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using VkBot.Manager.Data;
-using VkBot.Manager.Models;
 
 namespace VkBot.Manager.Services.Models
 {

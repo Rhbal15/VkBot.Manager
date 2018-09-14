@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using VkBot.Manager.Data;
 using VkBot.Manager.Extensions;
-using VkBot.Manager.Models;
 using VkBot.Manager.Services;
 using VkBot.Manager.ViewModels.AccountViewModels;
 

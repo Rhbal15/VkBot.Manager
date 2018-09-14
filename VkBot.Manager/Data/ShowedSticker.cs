@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VkBot.Manager.Data;
-
-namespace VkBot.Manager.Models
+﻿namespace VkBot.Manager.Data
 {
     public class ShowedSticker
     {

@@ -1,4 +1,4 @@
-﻿namespace VkBot.Manager.Models
+﻿namespace VkBot.Manager.Data
 {
     public class KeyboardButton
     {

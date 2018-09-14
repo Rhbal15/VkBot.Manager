@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VkBot.Manager.Data;
-using VkBot.Manager.Models;
 using VkBot.Manager.Services.Telegram;
 using VkBot.Manager.Services.Vk;
 

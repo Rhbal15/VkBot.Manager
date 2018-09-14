@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using VkBot.Manager.Data;
 using VkBot.Manager.Helpers;
-using VkBot.Manager.Models;
 using VkBot.Manager.Services;
 using VkBot.Manager.Services.Models;
 using VkBot.Manager.Services.Telegram;

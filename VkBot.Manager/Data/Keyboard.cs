@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VkBot.Manager.Models
+namespace VkBot.Manager.Data
 {
     public class Keyboard
     {

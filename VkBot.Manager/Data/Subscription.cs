@@ -1,5 +1,4 @@
 ﻿using System;
-using VkBot.Manager.Models;
 using VkBot.Manager.ViewModels.BotViewModels;
 
 namespace VkBot.Manager.Data
