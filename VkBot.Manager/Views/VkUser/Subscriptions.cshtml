@@ -1,0 +1,36 @@
+﻿@using VkBot.Manager.ViewModels.BotViewModels
+@model VkBot.Manager.Controllers.SubscriptionsVkUserViewModel
+
+@{
+    ViewBag.Title = "Подписки";
+    Layout = "_Layout";
+}
+
+<br/>
+
+<h2>Подписки</h2>
+
+<br/>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Дата</th>
+        <th scope="col">Ид пользователя ВК</th>
+        <th scope="col">Имя пользователя</th>
+        <th scope="col">Действие</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var subscription in Model.Subscriptions)
+    {
+        <tr class="@(subscription.JoinType == JoinType.Join ? "" : "table-danger")">
+            <td>@subscription.JoinDate</td>
+            <td>
+                <a href="@subscription.VkUrl">@subscription.VkId</a>
+            </td>
+            <td> @subscription.UserFullName</td>
+            <td>@(subscription.JoinType == JoinType.Join ? "Подписался" : "Отписался")</td>
+        </tr>
+    }
+    </tbody>
+</table>

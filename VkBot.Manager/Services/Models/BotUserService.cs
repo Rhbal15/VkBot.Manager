@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using VkBot.Manager.Data;
-using VkBot.Manager.Models;
 using VkBot.Manager.ViewModels.BotViewModels;
 
 namespace VkBot.Manager.Services.Models
@@ -64,6 +64,13 @@ namespace VkBot.Manager.Services.Models
             _context.Add(subscription);
 
             _context.SaveChanges();
+        }
+
+        public IEnumerable<Subscription> GetSubscriptions()
+        {
+            return _context.Subscriptions
+                .Include(p => p.BotUser)
+                .OrderByDescending(p => p.JoinDate);
         }
 
         private bool IsAlreadyAdded(long vkUserId, JoinType? joinType)
