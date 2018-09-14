@@ -10,7 +10,7 @@ using VkBot.Manager.ViewModels.BotViewModels;
 namespace VkBot.Manager.Controllers
 {
     [Route("api/[controller]")]
-    public class BotController : Controller
+    public class VkUpdateController : Controller
     {
         private readonly IVkGroupMessageService _vkGroupMessageService;
         private readonly IConfigurationHelperService _configurationHelper;
@@ -20,7 +20,7 @@ namespace VkBot.Manager.Controllers
         private readonly IBotUserService _botUserService;
         private readonly IReceivedMessageService _receivedMessageService;
 
-        public BotController(
+        public VkUpdateController(
             IVkGroupMessageService vkGroupMessageService,
             IConfigurationHelperService configurationHelper,
             IStickerService stickerService,
@@ -45,6 +45,12 @@ namespace VkBot.Manager.Controllers
             {
                 case VkUpdateType.Confirmation:
                     return _configurationHelper.GetCallbackConfirmationString();
+                case VkUpdateType.GroupJoin:
+                    _botUserService.CreateSubscription(update.Object.UserId, JoinType.Join);
+                    break;
+                case VkUpdateType.GroupLeave:
+                    _botUserService.CreateSubscription(update.Object.UserId, JoinType.Leave);
+                    break;
                 case VkUpdateType.MessageNew:
 
                     if (_receivedMessageService.IsReceived(update.Object.UserId, update.Object.Id))
@@ -60,7 +66,8 @@ namespace VkBot.Manager.Controllers
 
                     var body = update.Object.Body;
 
-                    var keyboardLabels = _keyboardService.GetActiveKeyboard().Buttons.OrderBy(p => p.Postition).Select(p => p.Emoji.Symbol)
+                    var keyboardLabels = _keyboardService.GetActiveKeyboard().Buttons.OrderBy(p => p.Postition)
+                        .Select(p => p.Emoji.Symbol)
                         .ToList();
 
                     if (_receivedMessageService.IsFirstMessage(update.Object.UserId, update.Object.Id))

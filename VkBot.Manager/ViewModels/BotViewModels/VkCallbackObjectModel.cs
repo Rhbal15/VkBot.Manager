@@ -23,5 +23,6 @@ namespace VkBot.Manager.ViewModels.BotViewModels
     public enum JoinType
     {
         [EnumMember(Value = "join")] Join,
+        Leave
     }
 }

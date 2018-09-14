@@ -31,7 +31,8 @@ namespace VkBot.Manager
         public void ConfigureServices(IServiceCollection services)
         {
             _loggerFactory.AddAzureWebAppDiagnostics();
-
+            _loggerFactory.AddConsole();
+            _loggerFactory.AddDebug();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             

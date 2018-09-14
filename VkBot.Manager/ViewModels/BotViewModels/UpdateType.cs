@@ -9,6 +9,7 @@ namespace VkBot.Manager.ViewModels.BotViewModels
     {
         [EnumMember(Value = "confirmation")] Confirmation,
         [EnumMember(Value = "group_join")] GroupJoin,
-        [EnumMember(Value = "message_new")] MessageNew
+        [EnumMember(Value = "message_new")] MessageNew,
+        [EnumMember(Value = "group_leave")] GroupLeave
     }
 }
