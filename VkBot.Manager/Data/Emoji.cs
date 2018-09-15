@@ -7,6 +7,7 @@ namespace VkBot.Manager.Data
         public int Id { get; set; }
 
         public string Symbol { get; set; }
+        
         public EmojiGroup EmojiGroup { get; set; }
 
         public virtual IEnumerable<StickerEmoji> Stickers { get; set; }

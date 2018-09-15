@@ -13,4 +13,14 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\VkBot.Manager\VkBot.Manager.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.EntityFrameworkCore">
+      <HintPath>..\..\..\..\.nuget\packages\microsoft.entityframeworkcore\2.1.2\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

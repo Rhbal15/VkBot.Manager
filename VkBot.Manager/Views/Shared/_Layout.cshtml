@@ -27,11 +27,15 @@
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="StickerSet" asp-action="Index">Наборы стикеров</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Keyboard" asp-action="Index">Клавиатура</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Emoji" asp-action="Index">Смайлы</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Смайлы
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" asp-controller="Keyboard" asp-action="Index">Клавиатура</a>
+                        <a class="dropdown-item" asp-controller="Emoji" asp-action="Group">Группы</a>
+                        <a class="dropdown-item" asp-controller="Emoji" asp-action="Index">Все смайлы</a>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="Intent" asp-action="Index">Интенты</a>

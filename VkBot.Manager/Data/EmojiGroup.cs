@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VkBot.Manager.Data
 {
@@ -13,7 +14,7 @@ namespace VkBot.Manager.Data
         public string Name { get; set; }
         public int Priority { get; set; }
         public DateTime CreateDate { get; set; }
-
-        public IEnumerable<Emoji> Emojis { get; set; }
+        
+        public ICollection<Emoji> Emojis { get; set; }
     }
 }

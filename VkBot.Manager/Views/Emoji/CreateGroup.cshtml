@@ -1,0 +1,59 @@
+﻿@using VkBot.Manager.ViewModels.EmojisViewModels
+@model ErrorCreateGroupInputModel
+@{
+    ViewBag.Title = "Создать группу";
+    Layout = "_Layout";
+}
+
+<br/>
+
+<h2>Создать группу</h2>
+
+<br/>
+
+<form method="post" asp-action="CreateGroup">
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <label for="name">Название группы</label>
+            <input type="text"
+                   class="form-control @(Model.ErrotType == ErrorCreateGroupType.SuchGroupNameExists ? "is-invalid" : "")"
+                   name="name" id="name" placeholder="Название группы"
+                   value="@(Model.Name ?? "")">
+            @if (Model.ErrotType == ErrorCreateGroupType.SuchGroupNameExists)
+            {
+                <div class="invalid-feedback">
+                    Название группы совпадает с существующим. Изменить название и попробуйте создать группу еще раз.
+                </div>
+            }
+            else
+            {
+                <small id="nameHelp" class="form-text text-muted">Название группы не должно совпадать с уже существующим.</small>
+            }
+
+        </div>
+        <div class="form-group col-md-4">
+            <label for="priority">Приоретет</label>
+            <input type="number" class="form-control @(Model.ErrotType == ErrorCreateGroupType.SuchGroupPriorityExists ? "is-invalid" : "")"
+                   name="priority" id="priority" placeholder="Приоретет"
+                   value="@(Model.Priority.ToString() ?? "")">
+            @if (Model.ErrotType == ErrorCreateGroupType.SuchGroupPriorityExists)
+            {
+                <div class="invalid-feedback">
+                    Группа с таким приорететом уже существует. Попробуйте указать другой приоретет. Потом его можно будет поменять.
+                </div>
+            }
+            else
+            {
+                <small id="priorityHelp" class="form-text text-muted">Чем меньше число приоретета, тем выше он будет отображаться в списке групп.</small>
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="emojiSequence">Смайлы</label>
+        <input type="text" class="form-control" name="emojiSequence" id="emojiSequence" placeholder="Смайлы"
+               value="@(Model.EmojiSequence ?? "")">
+        <small id="emojiSequenceHelp" class="form-text text-muted">Необходимо ввести последовательность смайлов через пробел, которые вы хотите добавить в группу. Если данные смайлы уже добавлены в другую группу, они будут удалены из нее.</small>
+    </div>
+    <br/>
+    <button type="submit" class="btn btn-outline-primary">Создать</button>
+</form>
