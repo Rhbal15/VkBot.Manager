@@ -3,7 +3,6 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VkBot.Manager.Services.Models;
-using VkBot.Manager.Services.Vk;
 using VkBot.Manager.ViewModels.StickersViewModels;
 
 namespace VkBot.Manager.Controllers

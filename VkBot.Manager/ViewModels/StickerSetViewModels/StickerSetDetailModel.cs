@@ -11,5 +11,6 @@ namespace VkBot.Manager.ViewModels.StickerSetViewModels
         public string VkAlbumUrl { get; set; }
         public IEnumerable<StickerDetailModel> Stickers { get; set; }
         public int StickerCount { get; set; }
+        public bool IsPublished { get; set; }
     }
 }

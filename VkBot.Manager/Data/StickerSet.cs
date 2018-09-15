@@ -12,6 +12,8 @@ namespace VkBot.Manager.Data
         public DateTime CreatedDate { get; set; }
         public StickerSetStatus StickerSetStatus { get; set; }
 
+        public bool IsPublished { get; set; }
+
         public virtual IEnumerable<Sticker> Stickers { get; set; }
     }
 

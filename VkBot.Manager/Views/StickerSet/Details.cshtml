@@ -1,5 +1,4 @@
-﻿@using VkBot.Manager.ViewModels.StickerSetViewModels
-@model VkBot.Manager.ViewModels.StickerSetViewModels.StickerSetDetailModel
+﻿@model VkBot.Manager.ViewModels.StickerSetViewModels.StickerSetDetailModel
 
 @{
     ViewBag.Title = Model.Title;
@@ -16,19 +15,36 @@
     <dt class="col-sm-3">Дата создания</dt>
     <dd class="col-sm-9">@Model.CreatedDate</dd>
 
-    <dt class="col-sm-3">ИД альбома в вк</dt>
-    <dd class="col-sm-9">
-        <a href="@Model.VkAlbumUrl">@Model.VkAlbumId</a>
-    </dd>
+    @if (Model.IsPublished)
+    {
+        <dt class="col-sm-3">ИД альбома в вк</dt>
+        <dd class="col-sm-9">
+            <a href="@Model.VkAlbumUrl">@Model.VkAlbumId</a>
+        </dd>
+    }
+
 
     <dt class="col-sm-3">Количество стикеров</dt>
     <dd class="col-sm-9" id="stickerCount"> @Model.StickerCount</dd>
-
+    
+    @if (Model.IsPublished)
+    {
+        <dt class="col-sm-3">Статус</dt>
+        <dd class="col-sm-9 text-success" id="stickerCount">Опубликован</dd>
+    }
+    else
+    {
+        <dt class="col-sm-3">Статус</dt>
+        <dd class="col-sm-9" id="stickerCount">Неопубликован</dd>
+    }
 </dl>
 
 
 <a href="" class="btn btn-outline-dark btn-sm">Редактировать</a>
-<a asp-action="Publish" asp-route-id="@Model.Id" class="btn btn-outline-dark btn-sm">Опубликовать</a>
+@if (!Model.IsPublished)
+{
+    <a asp-action="Publish" asp-route-id="@Model.Id" class="btn btn-outline-dark btn-sm">Опубликовать</a>
+}
 <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger btn-sm">Удалить</a>
 
 <br />

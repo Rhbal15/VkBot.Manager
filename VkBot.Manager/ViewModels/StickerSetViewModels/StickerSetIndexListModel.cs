@@ -8,5 +8,6 @@
         public string CreatedDate { get; set; }
         public int SickerCount { get; set; }
         public string AvaliableEmoji { get; set; }
+        public bool IsPublished { get; set; }
     }
 }

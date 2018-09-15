@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VkBot.Manager.Data;
@@ -114,27 +113,24 @@ namespace VkBot.Manager.Services.Models
 
         public Sticker GetStickerByEmoji(string inputEmoji, long botUserId)
         {
-
-            var emojis = _context.Emojis.Include(p => p.Stickers).ThenInclude(p => p.Sticker).ToList();
-             
-            Emoji emoji = null;
-
-            foreach (var item in emojis)
-            {
-                if (item.Symbol == inputEmoji)
-                {
-                    emoji = item;
-                }
-            }
+            var emoji = _context.Emojis
+                .Include(p => p.Stickers)
+                .ThenInclude(p => p.Sticker)
+                .ThenInclude(p => p.StickerSet)
+                .ToList()
+                .FirstOrDefault(p => p.Symbol == inputEmoji);
 
             if (emoji == null)
             {
                 return null;
             }
 
-            var stickers = emoji.Stickers.Select(p => p.Sticker).ToList();
+            var stickers = emoji.Stickers
+                .Select(p => p.Sticker)
+                .Where(p => p.StickerSet.IsPublished)
+                .ToList();
 
-            if (stickers.Count == 0)
+            if (!stickers.Any())
             {
                 return null;
             }
@@ -146,10 +142,10 @@ namespace VkBot.Manager.Services.Models
 
             var stickerExcept = stickers.Except(showedStickersEntity).ToList();
 
-            
-            if (stickerExcept.Count != 0)
+
+            if (stickerExcept.Any())
             {
-                stickers = stickerExcept;                
+                stickers = stickerExcept;
             }
             else
             {
@@ -162,7 +158,7 @@ namespace VkBot.Manager.Services.Models
 
             var sticker = stickers.ElementAt(next);
 
-            _context.ShowedStickers.Add(new ShowedSticker()
+            _context.ShowedStickers.Add(new ShowedSticker
             {
                 Sticker = sticker,
                 BotUser = _context.BotUsers.FirstOrDefault(p => p.VkId == botUserId),
@@ -176,7 +172,8 @@ namespace VkBot.Manager.Services.Models
 
         public StickerSet GetStickerSet(int id)
         {
-            return _context.StickerSets.Include(p => p.Stickers).ThenInclude(p => p.Emoji).ThenInclude(p => p.Emoji)
+            return _context.StickerSets
+                .Include(p => p.Stickers).ThenInclude(p => p.Emoji).ThenInclude(p => p.Emoji)
                 .FirstOrDefault(p => p.Id == id);
         }
 
@@ -250,7 +247,8 @@ namespace VkBot.Manager.Services.Models
 
         public async Task PublishStickerSet(int stickerSetId)
         {
-            var stickerSet = await _context.StickerSets.Include(p => p.Stickers).FirstOrDefaultAsync(p => p.Id == stickerSetId);
+            var stickerSet = await _context.StickerSets.Include(p => p.Stickers)
+                .FirstOrDefaultAsync(p => p.Id == stickerSetId);
 
             if (stickerSet == null || stickerSet.StickerSetStatus == StickerSetStatus.Published)
             {
@@ -260,6 +258,8 @@ namespace VkBot.Manager.Services.Models
             var album = await _vkGroupPhotoService.CreateAlbum(stickerSet.Title);
 
             stickerSet.VkAlbumId = album.Id;
+            stickerSet.IsPublished = true;
+
             _context.Update(stickerSet);
 
             foreach (var sticker in stickerSet.Stickers)

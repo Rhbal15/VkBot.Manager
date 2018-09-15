@@ -41,7 +41,8 @@ namespace VkBot.Manager.Controllers
                     CreatedDate = p.CreatedDate.ToString(CultureInfo.CurrentCulture),
                     SickerCount = p.Stickers.Count(),
                     AvaliableEmoji = string.Join(" ",
-                        _emojiService.GetAvaliableStickerSetEmojis(p.Id).Select(s => s.Symbol))
+                        _emojiService.GetAvaliableStickerSetEmojis(p.Id).Select(s => s.Symbol)),
+                    IsPublished = p.IsPublished
                 })
             };
 
@@ -66,7 +67,8 @@ namespace VkBot.Manager.Controllers
                     VkPhotoUrl = p.AzureImageUrl,
                     Emojis = string.Join(" ", p.Emoji.Select(e => e.Emoji).Select(e => e.Symbol))
                 }),
-                StickerCount = stickerSet.Stickers.Count()
+                StickerCount = stickerSet.Stickers.Count(),
+                IsPublished = stickerSet.IsPublished
             };
 
             return View(model);
