@@ -118,12 +118,4 @@ namespace VkBot.Manager.Controllers
             return "ok";
         }
     }
-
-    public static class StringHelper
-    {
-        public static bool EqualsIgnoreCase(this string first, string second)
-        {
-            return string.Equals(first, second, StringComparison.OrdinalIgnoreCase);
-        }
-    }
 }

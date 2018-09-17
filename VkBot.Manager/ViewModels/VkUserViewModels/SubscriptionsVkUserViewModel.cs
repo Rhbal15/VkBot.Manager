@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VkBot.Manager.Controllers
+namespace VkBot.Manager.ViewModels.VkUserViewModels
 {
     public class SubscriptionsVkUserViewModel
     {

@@ -9,10 +9,4 @@ namespace VkBot.Manager.Data
         public KeyboardStatus KeyboardStatus { get; set; }
         public IEnumerable<KeyboardButton> Buttons { get; set; }
     }
-
-    public enum KeyboardStatus
-    {
-        Active,
-        Inactive
-    }
 }

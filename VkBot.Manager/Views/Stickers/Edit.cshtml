@@ -112,9 +112,9 @@
             });
         }
 
-        function RemoveEmoji(stickerEmojiId) {
+        function RemoveSentence(stickerEmojiId) {
             $.ajax({
-                url: "@($"{Url.Action("RemoveEmoji", "Stickers")}/")" + stickerEmojiId,
+                url: "@($"{Url.Action("RemoveSentence", "Stickers")}/")" + stickerEmojiId,
                 contentType: "application/json",
                 method: "DELETE",
                 success: function(emojiId) {
@@ -149,7 +149,7 @@
             function (event) {
                 event.preventDefault();
                 var emojiStickerId = $(this).data("id");
-                RemoveEmoji(emojiStickerId);
+                RemoveSentence(emojiStickerId);
             });
     </script>
 }

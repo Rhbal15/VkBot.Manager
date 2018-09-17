@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace VkBot.Manager.ViewModels.EmojisViewModels
+﻿namespace VkBot.Manager.ViewModels.EmojisViewModels
 {
     public class GroupListEmojisViewModel
     {

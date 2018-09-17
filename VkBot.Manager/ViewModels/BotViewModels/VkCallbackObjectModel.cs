@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -18,11 +17,5 @@ namespace VkBot.Manager.ViewModels.BotViewModels
         public string Title { get; set; }
         public string Body { get; set; }
         [JsonProperty("join_type")] public JoinType? JoinType { get; set; }
-    }
-
-    public enum JoinType
-    {
-        [EnumMember(Value = "join")] Join,
-        Leave
     }
 }

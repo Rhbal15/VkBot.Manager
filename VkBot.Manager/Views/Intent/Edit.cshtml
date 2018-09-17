@@ -1,22 +1,22 @@
 ﻿@using VkBot.Manager.Controllers
 @using VkBot.Manager.ViewModels.IntentViewModels
-@model VkBot.Manager.ViewModels.IntentViewModels.ErrorCreateIntentInputModel
+@model VkBot.Manager.ViewModels.IntentViewModels.EditIntentViewModel
 
 @{
-    ViewBag.Title = "Создать интент";
+    ViewBag.Title = "Редактировать интента";
     Layout = "_Layout";
 }
 
 <br/>
 
-<h2>Создать интент</h2>
+<h2>Редактировать интент: @Model.Name</h2>
 
 <br/>
 
-<form method="post" asp-action="Create">
+<form method="post" asp-action="Edit">
     <div class="form-group">
         <label for="intent-name">Название</label>
-        <input type="text" class="form-control @(Model.ErrorType == ErrorCreateIntentType.SuchIntentNameExists ? "is-invalid" : "")" 
+        <input type="text" class="form-control @(Model.ErrorType == ErrorCreateIntentType.SuchIntentNameExists ? "is-invalid" : "")"
                id="intent-name" name="name" placeholder="Название интента"
                value="@(Model.Name ?? "")">
         @if (Model.ErrorType == ErrorCreateIntentType.SuchIntentNameExists)
@@ -30,6 +30,5 @@
         <label for="intent-sentences">Предложения</label>
         <textarea name="sentences" class="form-control" id="intent-sentences" rows="5">@(Model.Sentences?? "")</textarea>
     </div>
-    <button type="submit" class="btn btn-outline-primary">Создать</button>
+    <button type="submit" class="btn btn-outline-primary">Редактировать</button>
 </form>
-

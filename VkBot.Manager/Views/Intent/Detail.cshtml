@@ -1,0 +1,92 @@
+﻿@using VkBot.Manager.ViewModels.IntentViewModels
+@model VkBot.Manager.ViewModels.IntentViewModels.IntentDetailViewModel
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "_Layout";
+}
+
+<br/>
+
+<h2>@Model.Name</h2>
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary">Редактировать</a>
+<a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">Удалить</a>
+
+<br/>
+<br/>
+
+<form id="add-new-sentence" asp-action="AddSentence" method="post">
+    <div class="form-row">
+        <input type="hidden" name="IntentId" value="@Model.Id"/>
+        <div class="col-8">
+            <label for="new-sentence" class="sr-only">Новое предложение</label>
+            <input type="text" name="SentenceText" class="form-control" id="new-sentence" placeholder="Введите новое предложение для интента">
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-outline-primary">Добавить</button>
+        </div>
+    </div>
+</form>
+
+<br/>
+
+<ul class="list-group" id="sentences">
+    @foreach (var sentence in Model.Sentences)
+    {
+        <li class="list-group-item d-flex justify-content-between align-items-center" data-rowid="@sentence.Id">
+            @sentence.Text
+            <a href="#" class="remove-sentence" data-id="@sentence.Id">Удалить</a>
+        </li>
+    }
+</ul>
+
+@section Scripts
+{
+    <script>
+
+        function RemoveSentence(intentSentenceId) {
+            $.ajax({
+                url: `@($"{Url.Action("DeleteSentence", "Intent")}/")${intentSentenceId}`,
+                contentType: "application/json",
+                method: "DELETE",
+                success: function(emojiId) {
+                    $(`li[data-rowid='${intentSentenceId}']`).remove();
+                }
+            });
+        }
+
+        $("body").on("click",
+            ".remove-sentence",
+            function(event) {
+                event.preventDefault();
+                const intentSentenceId = $(this).data("id");
+                RemoveSentence(intentSentenceId);
+            });
+
+        $("#add-new-sentence").submit(function(e) {
+            const form = $(this);
+            const url = form.attr('action');
+            console.log("Сабмит формы");
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data) {
+                    console.log(data);
+
+                    $("#sentences").append(
+                        `<li class="list-group-item d-flex justify-content-between align-items-center" data-rowid="${
+                        data.id}">${data.text}
+                        <a href="#" class="remove-sentence" data-id="${data.id}">Удалить</a></li>`);
+
+                    form[0].reset();
+                },
+                error: function(data) {
+                    alert(data.responseText);
+                }
+            });
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+        });
+    </script>
+}

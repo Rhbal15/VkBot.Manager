@@ -1,6 +1,6 @@
 ﻿using VkBot.Manager.ViewModels.BotViewModels;
 
-namespace VkBot.Manager.Controllers
+namespace VkBot.Manager.ViewModels.VkUserViewModels
 {
     public class SubscriptionsVkUserListViewModel
     {

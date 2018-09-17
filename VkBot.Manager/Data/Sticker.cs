@@ -17,10 +17,4 @@ namespace VkBot.Manager.Data
         public DateTime CreatedDate { get; set; }
         public IEnumerable<ShowedSticker> ShowedStickers { get; set; }
     }
-
-    public enum StickerStatus
-    {
-        Unpublished,
-        Published
-    }
 }

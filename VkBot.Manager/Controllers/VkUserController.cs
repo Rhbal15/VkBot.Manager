@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using VkBot.Manager.Services.Models;
+using VkBot.Manager.ViewModels.VkUserViewModels;
 
 namespace VkBot.Manager.Controllers
 {

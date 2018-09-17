@@ -7,11 +7,4 @@
         public int Priority { get; set; }
         public string EmojiSequence { get; set; }
     }
-
-    public enum ErrorCreateGroupType
-    {
-        None,
-        SuchGroupNameExists,
-        SuchGroupPriorityExists
-    }
 }

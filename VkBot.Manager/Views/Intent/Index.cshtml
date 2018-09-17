@@ -8,3 +8,17 @@
 <br/>
 
 <h2>Интенты</h2>
+<a asp-action="Create" class="btn btn-outline-primary">Создать интент</a>
+
+<br/>
+<br/>
+
+<ul class="list-group">
+    @foreach (var intent in Model.Intents)
+    {
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a asp-controller="Intent" asp-action="Detail" asp-route-id="@intent.Id">@intent.Name</a>
+            <span class="badge badge-primary badge-pill">@intent.SentenceCount</span>
+        </li>
+    }
+</ul>

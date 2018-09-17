@@ -16,10 +16,4 @@ namespace VkBot.Manager.Data
 
         public virtual IEnumerable<Sticker> Stickers { get; set; }
     }
-
-    public enum StickerSetStatus
-    {
-        Unpublished,
-        Published
-    }
 }
