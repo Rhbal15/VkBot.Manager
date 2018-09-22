@@ -114,7 +114,7 @@
 
         function RemoveSentence(stickerEmojiId) {
             $.ajax({
-                url: "@($"{Url.Action("RemoveSentence", "Stickers")}/")" + stickerEmojiId,
+                url: "@($"{Url.Action("RemoveEmoji", "Stickers")}/")" + stickerEmojiId,
                 contentType: "application/json",
                 method: "DELETE",
                 success: function(emojiId) {

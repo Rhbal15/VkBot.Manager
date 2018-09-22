@@ -1,0 +1,15 @@
+﻿@model VkBot.Manager.Controllers.GroupDetailEmojiViewModel
+
+@{
+    ViewBag.Title = "Группа - " + Model.Name;
+    Layout = "_Layout";
+}
+
+<br />
+
+<h2>Группа - @Model.Name</h2>
+
+<br />
+
+<a asp-action="GroupEdit" asp-route-id="@Model.Id" class="btn btn-outline-primary">Редактировать</a>
+<a asp-action="GroupDelete" asp-route-id="@Model.Id" class="btn btn-outline-danger">Удалить</a>

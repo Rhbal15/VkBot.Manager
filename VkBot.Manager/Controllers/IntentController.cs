@@ -148,7 +148,7 @@ namespace VkBot.Manager.Controllers
 
         [HttpPost]
         public IActionResult AddSentence(AddSentenceIntentInputModel inputModel)
-        {
+        { 
             try
             {
                 var intentSentence = _intentService.AddSentence(inputModel.IntentId, new IntentSentenceInputModel

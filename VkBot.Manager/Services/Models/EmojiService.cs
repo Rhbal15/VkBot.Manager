@@ -63,9 +63,22 @@ namespace VkBot.Manager.Services.Models
                 .Distinct((first, second) => first.Symbol == second.Symbol);
         }
 
-        public IEnumerable<EmojiGroup> GetGroups()
+        public IEnumerable<EmojiGroup> GetAllEmojiGroup()
         {
-            var emojiGroups = _context.EmojiGroups.OrderBy(p => p.Priority);
+            return _context.EmojiGroups
+                .Include(p => p.Emojis);
+        }
+
+        public EmojiGroup GetGroup(int id)
+        {
+            return GetAllEmojiGroup()
+                .FirstOrDefault(p => p.Id == id);
+        }
+
+        public IEnumerable<EmojiGroup> GetAllEmojiGroupsSortedByPriority()
+        {
+            var emojiGroups = GetAllEmojiGroup()
+                .OrderBy(p => p.Priority);
 
             return emojiGroups;
         }

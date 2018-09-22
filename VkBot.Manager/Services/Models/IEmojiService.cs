@@ -14,7 +14,10 @@ namespace VkBot.Manager.Services.Models
 
         bool IsExist(string symbol);
         IEnumerable<Emoji> GetAvaliableStickerSetEmojis(int stickerSetId);
-        IEnumerable<EmojiGroup> GetGroups();
+
+        IEnumerable<EmojiGroup> GetAllEmojiGroup();
+        EmojiGroup GetGroup(int id);
+        IEnumerable<EmojiGroup> GetAllEmojiGroupsSortedByPriority();
         void CreateGroup(CreateGroupEmojiInputModel inputModel);
 
         IEnumerable<string> SplitEmojiSequence(string emojiSequence);

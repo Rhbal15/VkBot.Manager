@@ -12,3 +12,21 @@
 <br/>
 
 <a asp-action="CreateGroup" class="btn btn-outline-primary">Создать группу</a>
+
+<br/>
+<br/>
+
+
+@foreach (var group in Model.Groups)
+{
+    <div class="row border">
+        <div class="col-md-12">
+            <br/>
+            <a asp-controller="Emoji" asp-action="GroupDetail" class="float-left" asp-route-id="@group.Id">@group.Name</a>
+        </div>
+        <div class="col-md-12">
+            <hr/>
+            <p>@group.Emojis</p>
+        </div>
+    </div>
+}
