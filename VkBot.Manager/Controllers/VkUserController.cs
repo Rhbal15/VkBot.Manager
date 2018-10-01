@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VkBot.Manager.Services.Models;
 using VkBot.Manager.ViewModels.VkUserViewModels;
@@ -10,6 +11,7 @@ namespace VkBot.Manager.Controllers
     /// <summary>
     /// Контроллер для работы с аналатикой группы и бота. Просмотра пользователей группы, подписок и отписок, сообщений, на которые бот не смог ответить.
     /// </summary>
+    [Authorize]
     public class VkUserController : Controller
     {
         private readonly IBotUserService _botUserService;

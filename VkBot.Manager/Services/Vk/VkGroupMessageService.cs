@@ -29,7 +29,8 @@ namespace VkBot.Manager.Services.Vk
         public void SendMessage(long userId, string message = "", long? photoId = null,
             List<string> keyboardLabels = null)
         {
-            var keyboard = CreateKeyboard(keyboardLabels?.GetRange(0, keyboardLabels.Count < 40 ? keyboardLabels.Count : 40));
+            var keyboard =
+                CreateKeyboard(keyboardLabels?.GetRange(0, keyboardLabels.Count < 36 ? keyboardLabels.Count : 36));
 
             _api.Messages.Send(new MessagesSendParams
             {
@@ -56,6 +57,8 @@ namespace VkBot.Manager.Services.Vk
                 var keyboardRow = CreateMessageKeyboardRow(range);
                 buttons.Add(keyboardRow);
             }
+
+            buttons.Add(CreateMessageKeyboardRow(new List<string> {"Случайный стикер"}));
 
             return new MessageKeyboard
             {

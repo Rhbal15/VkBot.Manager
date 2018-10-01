@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 using VkBot.Manager.Exceptions;
@@ -8,6 +9,7 @@ using VkBot.Manager.ViewModels.IntentViewModels;
 
 namespace VkBot.Manager.Controllers
 {
+    [Authorize]
     public class IntentController : Controller
     {
         private readonly IIntentService _intentService;

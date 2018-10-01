@@ -290,5 +290,13 @@ namespace VkBot.Manager.Services.Models
 
             _context.SaveChanges();
         }
+
+        public Sticker GetRandomSticker()
+        {
+            var count = _context.Stickers.Count();
+            var next = new Random().Next(count);
+
+            return _context.Stickers.ToList().ElementAt(next);
+        }
     }
 }

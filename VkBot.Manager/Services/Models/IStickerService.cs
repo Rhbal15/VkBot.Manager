@@ -27,5 +27,6 @@ namespace VkBot.Manager.Services.Models
         IEnumerable<Sticker> GetStickersByEmoji(string symbol);
         Task PublishStickerSet(int stickerSetId);
         void DeleteStickerSet(int stickerSetId);
+        Sticker GetRandomSticker();
     }
 }

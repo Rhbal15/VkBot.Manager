@@ -57,6 +57,7 @@ namespace VkBot.Manager
             services.AddScoped<IReceivedMessageService, ReceivedMessageService>();
             services.AddScoped<IAzureImageService, AzureImageService>();
             services.AddScoped<IIntentService, IntentService>();
+            services.AddScoped<IVkCompetitionService, VkCompetitionService>();
 
             services.AddMvc();
         }

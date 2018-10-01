@@ -101,11 +101,22 @@ namespace VkBot.Manager.Controllers
                         return "Ok";
                     }
 
-                    _vkGroupMessageService.SendMessage(update.Object.UserId,
-                        "Даже не знаю, что тебе на это ответить 😔\n\n" +
-                        "Пока я могу отвечать только на смайлы. Попробуешь использовать клавиатуру, которую я прислал? \n\n" +
-                        "Тогда я точно смогу прислать тебе ответ.",
-                        keyboardLabels: keyboardLabels);
+                    if (update.Object.Body.EqualsIgnoreCase("Случайный стикер"))
+                    {
+                        var sticker = _stickerService.GetRandomSticker();
+
+                        _vkGroupMessageService.SendMessage(userId: update.Object.UserId,
+                            photoId: sticker.VkImageId, keyboardLabels: keyboardLabels);
+                    }
+
+                    if (update.Object.Body.EqualsIgnoreCase("Начать"))
+                    {
+                        _vkGroupMessageService.SendMessage(update.Object.UserId,
+                            "Даже не знаю, что тебе на это ответить 😔\n\n" +
+                            "Пока я могу отвечать только на смайлы. Попробуешь использовать клавиатуру, которую я прислал? \n\n" +
+                            "Тогда я точно смогу прислать тебе ответ.",
+                            keyboardLabels: keyboardLabels);
+                    }
 
                     break;
                 case null:

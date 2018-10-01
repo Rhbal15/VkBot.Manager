@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 using VkBot.Manager.Data;
@@ -10,6 +11,7 @@ using VkBot.Manager.ViewModels.EmojisViewModels;
 
 namespace VkBot.Manager.Controllers
 {
+    [Authorize]
     public class EmojiController : Controller
     {
         private readonly IEmojiService _emojiService;
