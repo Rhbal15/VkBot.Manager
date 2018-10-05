@@ -107,9 +107,12 @@ namespace VkBot.Manager.Controllers
 
                         _vkGroupMessageService.SendMessage(userId: update.Object.UserId,
                             photoId: sticker.VkImageId, keyboardLabels: keyboardLabels);
+
+                        return "Ok";
+
                     }
 
-                    if (update.Object.Body.EqualsIgnoreCase("Начать"))
+                    if (!update.Object.Body.EqualsIgnoreCase("Начать"))
                     {
                         _vkGroupMessageService.SendMessage(update.Object.UserId,
                             "Даже не знаю, что тебе на это ответить 😔\n\n" +
